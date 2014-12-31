@@ -1,12 +1,24 @@
 *.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Maven Build
+target/
+
+# Eclipse directories
+bin/
+.settings
+.classpath
+.project
+.tern-project
+
+# Forge file
+.forge_settings
+
+# Mac File
+*.DS_Store
+
+*~
