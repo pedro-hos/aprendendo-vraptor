@@ -6,6 +6,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<name>meus-contatos</name>
+	<url>https://pedrohosilva.wordpress.com/2014/12/29/aplicacao-web-com-vraptor-4-pt1/</url>
+	<description>Uma aplicação bem simples de cadastro de contatos para as postagens no blog.</description>
+	<organization>
+		<name>Pedro Hos</name>
+		<url>http://pedrohosilva.wordpress.com</url>
+	</organization>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
@@ -26,7 +38,7 @@
 			<version>4.3.7.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -38,6 +50,15 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Import the JTA API, we use provided scope as the API is included in 
+			JBoss WildFly -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.transaction</groupId>
+			<artifactId>jboss-transaction-api_1.2_spec</artifactId>
+			<version>1.0.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
 
