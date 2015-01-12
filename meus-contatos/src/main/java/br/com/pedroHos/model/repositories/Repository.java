@@ -19,7 +19,7 @@ public abstract class Repository<T> {
 	
 	protected Class<T> tipo = retornaTipo();
 	
-	@PersistenceContext(unitName = "primary")
+	@PersistenceContext(unitName = "meus-contatos-ds")
 	protected EntityManager em;
 
 	public void novo(T entidade) {
