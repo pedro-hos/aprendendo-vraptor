@@ -19,18 +19,18 @@ public class Telefone extends DefaultEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_telefone")
-	private TipoTelefone TipoTelefone;
+	private TipoTelefone tipoTelefone;
 	
 	@ManyToOne
 	@JoinColumn(name = "contato_fk")
 	private Contato contato;
 	
 	public TipoTelefone getTipoTelefone() {
-		return TipoTelefone;
+		return tipoTelefone;
 	}
 
 	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-		TipoTelefone = tipoTelefone;
+		this.tipoTelefone = tipoTelefone;
 	}
 
 	public String getDdd() {
