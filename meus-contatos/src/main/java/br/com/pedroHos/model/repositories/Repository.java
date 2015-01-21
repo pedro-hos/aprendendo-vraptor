@@ -3,6 +3,7 @@ package br.com.pedroHos.model.repositories;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
  * @author william
  *
  */
+@Stateless
 public abstract class Repository<T> {
 	
 	protected Class<T> tipo = retornaTipo();
