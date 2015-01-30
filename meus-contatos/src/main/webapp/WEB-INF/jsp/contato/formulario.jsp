@@ -112,6 +112,59 @@
 				</form>
 				
 			</div>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nome</th>
+						<th>Email</th>
+						<th>Tipo Contato</th>
+						<th>Telefones</th>
+						<th>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${ empty contatoList }">
+			     		<tr>
+			     			<td colspan="3">
+				     			Nenhum contato cadastrado! =(
+					        </td>
+					    </tr>
+			     	</c:if>
+			     	<c:if test="${not empty contatoList }">
+			     		<c:forEach items="${contatoList}" var="contato">
+							<tr>
+								<th scope="row">
+									<c:out value="${contato.id}"/>
+								</th>
+								<td> 
+									<c:out value="${contato.nome}"/>
+								</td>
+								<td>
+									<c:out value="${contato.email}"/>
+								</td>
+								<td>
+									<c:out value="${contato.tipoContato}"/>
+								</td>
+								<td>
+									<c:out value="(${contato.telefones[0].ddd}) ${contato.telefones[0].telefone}"/>
+									/
+									<c:out value="(${contato.telefones[1].ddd}) ${contato.telefones[1].telefone}"/>
+								</td>
+								<td>
+									<a href="${linkTo[ContatoController].remover(contato.id)}">
+										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</a>
+									 | 
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+			
 	    </div>
 	    
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

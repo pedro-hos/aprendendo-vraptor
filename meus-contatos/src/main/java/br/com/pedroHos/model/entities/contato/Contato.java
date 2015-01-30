@@ -2,6 +2,7 @@ package br.com.pedroHos.model.entities.contato;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,7 +20,7 @@ public class Contato extends DefaultEntity {
 	private String nome;
 	private String email;
 	
-	@OneToMany(mappedBy = "contato", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "contato", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Telefone> telefones;
 	
 	@Enumerated(EnumType.STRING)
