@@ -58,9 +58,9 @@ public class ContatoController {
 	}
 	
 	@Delete
-	@Path("/contato/{id}")
-	public void remover(Long id) {
-		System.out.println("######### " + id);
+	@Path("/contato")
+	public void remover(Contato contato) {
+		contatos.remover(contato);
 		result.redirectTo(this).formulario();
 	}
 

@@ -126,7 +126,7 @@
 				</thead>
 				<tbody>
 					<c:if test="${ empty contatoList }">
-			     		<tr>
+			     		<tr> 
 			     			<td colspan="3">
 				     			Nenhum contato cadastrado! =(
 					        </td>
@@ -140,7 +140,7 @@
 								</th>
 								<td> 
 									<c:out value="${contato.nome}"/>
-								</td>
+								</td> 
 								<td>
 									<c:out value="${contato.email}"/>
 								</td>
@@ -153,7 +153,7 @@
 									<c:out value="(${contato.telefones[1].ddd}) ${contato.telefones[1].telefone}"/>
 								</td>
 								<td>
-									<a href="${linkTo[ContatoController].remover(contato.id)}">
+									<a class="btn btn-default" href="${linkTo[ContatoController].remover(contato)}">
 										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</a>
 									 | 
