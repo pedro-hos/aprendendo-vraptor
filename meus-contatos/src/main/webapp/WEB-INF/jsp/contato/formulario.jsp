@@ -125,16 +125,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${ empty contatoList }">
-			     		<tr> 
-			     			<td colspan="3">
-				     			Nenhum contato cadastrado! =(
-					        </td>
-					    </tr>
-			     	</c:if>
 			     	<c:if test="${not empty contatoList }">
 			     		<c:forEach items="${contatoList}" var="contato">
-							<tr>
+							<tr id="_contato">
 								<th scope="row">
 									<c:out value="${contato.id}"/>
 								</th>
@@ -153,11 +146,14 @@
 									<c:out value="(${contato.telefones[1].ddd}) ${contato.telefones[1].telefone}"/>
 								</td>
 								<td>
-									<a class="btn btn-default" href="${linkTo[ContatoController].remover(contato)}">
+									<a id="_editar" class="btn btn-default" href="${linkTo[ContatoController].editar(contato.id)}" role="button">
 										<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</a>
-									 | 
-									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									
+									<input id = "_urlRemocao" value="${linkTo[ContatoController].remover(contato.id)}" type="hidden">
+									<a id="_remover" class="btn btn-default" href="#" role="button">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -170,5 +166,23 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/dist/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/dist/js/docs.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				var contato = $('#_contato');
+				
+				$("#_remover").click(function() {
+					$.ajax({
+						url: $('#_urlRemocao').attr("value"),
+						type: 'POST',
+						data: { _method: "DELETE"}
+					}).done(function(data, textStatus, jqXHR){
+						contato.fadeOut();
+					}).fail(function(jqXHR, textStatus, errorThrown){
+						alert("Deu erro na parada!");
+					});
+				});
+			})
+		</script>
 	</body>
 </html>

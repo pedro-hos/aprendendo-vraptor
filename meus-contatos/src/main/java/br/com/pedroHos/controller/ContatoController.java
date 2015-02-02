@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.pedroHos.model.entities.contato.Contato;
 import br.com.pedroHos.model.entities.contato.Telefone;
@@ -22,7 +23,6 @@ public class ContatoController {
 	
 	/**
 	 * CDI eyes only
-	 *
 	 * @deprecated
 	 */
 	public ContatoController(){}
@@ -36,7 +36,7 @@ public class ContatoController {
 	public void formulario() {
 		result.include( TipoContato.values() )
 			  .include( TipoTelefone.values())
-			  .include("contatoList", contatos.todos());
+			  .include( "contatoList", contatos.todosAtivos());
 	}
 	
 	@Post
@@ -54,14 +54,21 @@ public class ContatoController {
 	@Get
 	@Path("/contato")
 	public void todos() {
-		contatos.todos();
+		contatos.todosAtivos();
+	}
+	
+	@Put
+	@Path("/contato/{id}")
+	public void editar(Long id) {
+		result.include(contatos.comId(id))
+			  .redirectTo(this).formulario();
 	}
 	
 	@Delete
-	@Path("/contato")
-	public void remover(Contato contato) {
-		contatos.remover(contato);
-		result.redirectTo(this).formulario();
+	@Path("/contato/{id}")
+	public void remover(Long id) {
+		contatos.desativarComId(id);
+		result.nothing();
 	}
 
 }
