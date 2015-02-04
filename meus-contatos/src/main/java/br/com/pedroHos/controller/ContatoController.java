@@ -1,5 +1,7 @@
 package br.com.pedroHos.controller;
 
+import static br.com.caelum.vraptor.view.Results.*;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -39,6 +41,12 @@ public class ContatoController {
 			  .include( "contatoList", contatos.todosAtivos());
 	}
 	
+	@Get
+	@Path("/contato/tipo")
+	public void tipos() {
+		result.use(json()).from(TipoContato.values(), "tipos").serialize();
+	}
+	
 	@Post
 	@Path("/contato")
 	public void novo( Contato contato ) {
@@ -48,27 +56,31 @@ public class ContatoController {
 		}
 		
 		contatos.novo(contato);
-		result.redirectTo(this).formulario();
+		result.use(status()).ok();
 	}
 	
 	@Get
 	@Path("/contato")
 	public void todos() {
-		contatos.todosAtivos();
+		result.use(json())
+			  .withoutRoot()
+			  .from(contatos.todosAtivos())
+			  .serialize();
 	}
 	
 	@Put
 	@Path("/contato/{id}")
-	public void editar(Long id) {
-		result.include(contatos.comId(id))
-			  .redirectTo(this).formulario();
+	public void editar(Contato contato, Long id) {
+		contato.setId(id);
+		contatos.atualizar(contato);
+		result.use(status()).ok();
 	}
 	
 	@Delete
 	@Path("/contato/{id}")
 	public void remover(Long id) {
 		contatos.desativarComId(id);
-		result.nothing();
+		result.use(status()).ok();
 	}
 
 }
