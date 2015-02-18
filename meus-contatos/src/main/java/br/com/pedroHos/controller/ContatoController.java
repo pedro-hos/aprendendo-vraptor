@@ -1,6 +1,7 @@
 package br.com.pedroHos.controller;
 
-import static br.com.caelum.vraptor.view.Results.*;
+import static br.com.caelum.vraptor.view.Results.json;
+import static br.com.caelum.vraptor.view.Results.status;
 
 import javax.inject.Inject;
 
@@ -12,7 +13,6 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.pedroHos.model.entities.contato.Contato;
-import br.com.pedroHos.model.entities.contato.Telefone;
 import br.com.pedroHos.model.entities.contato.TipoContato;
 import br.com.pedroHos.model.entities.contato.TipoTelefone;
 import br.com.pedroHos.model.repositories.contato.Contatos;
@@ -51,8 +51,10 @@ public class ContatoController {
 	@Path("/contato")
 	public void novo( Contato contato ) {
 		
-		for(Telefone telefone : contato.getTelefones()) {
-			telefone.setContato(contato);
+		if(contato.getTelefones() != null) {
+			contato.getTelefones().forEach(t -> {
+				t.setContato(contato);
+			});
 		}
 		
 		contatos.novo(contato);
@@ -65,6 +67,7 @@ public class ContatoController {
 		result.use(json())
 			  .withoutRoot()
 			  .from(contatos.todosAtivos())
+			  .include("telefones")
 			  .serialize();
 	}
 	
