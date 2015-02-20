@@ -5,6 +5,7 @@ import static br.com.caelum.vraptor.view.Results.status;
 
 import javax.inject.Inject;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -12,6 +13,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.serialization.gson.WithoutRoot;
 import br.com.pedroHos.model.entities.contato.Contato;
 import br.com.pedroHos.model.entities.contato.Telefone;
 import br.com.pedroHos.model.entities.contato.TipoContato;
@@ -50,6 +52,7 @@ public class ContatoController {
 	
 	@Post
 	@Path(value = "/contato")
+	@Consumes(value = "application/json", options = WithoutRoot.class)
 	public void novo( Contato contato ) {
 		
 		if(contato.getTelefones() != null) {
@@ -74,6 +77,7 @@ public class ContatoController {
 	
 	@Put
 	@Path(value = "/contato/{id}")
+	@Consumes(value = "application/json", options = WithoutRoot.class)
 	public void editar(Contato contato, Long id) {
 		contato.setId(id);
 		contatos.atualizar(contato);
