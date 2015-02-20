@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.pedroHos.model.entities.contato.Contato;
+import br.com.pedroHos.model.entities.contato.Telefone;
 import br.com.pedroHos.model.entities.contato.TipoContato;
 import br.com.pedroHos.model.entities.contato.TipoTelefone;
 import br.com.pedroHos.model.repositories.contato.Contatos;
@@ -42,19 +43,19 @@ public class ContatoController {
 	}
 	
 	@Get
-	@Path("/contato/tipo")
+	@Path(value = "/contato/tipo")
 	public void tipos() {
 		result.use(json()).from(TipoContato.values(), "tipos").serialize();
 	}
 	
 	@Post
-	@Path("/contato")
+	@Path(value = "/contato")
 	public void novo( Contato contato ) {
 		
 		if(contato.getTelefones() != null) {
-			contato.getTelefones().forEach(t -> {
-				t.setContato(contato);
-			});
+			for (Telefone telefone : contato.getTelefones()) {
+				telefone.setContato(contato);
+			}
 		}
 		
 		contatos.novo(contato);
@@ -62,7 +63,7 @@ public class ContatoController {
 	}
 	
 	@Get
-	@Path("/contato")
+	@Path(value = "/contato")
 	public void todos() {
 		result.use(json())
 			  .withoutRoot()
@@ -72,7 +73,7 @@ public class ContatoController {
 	}
 	
 	@Put
-	@Path("/contato/{id}")
+	@Path(value = "/contato/{id}")
 	public void editar(Contato contato, Long id) {
 		contato.setId(id);
 		contatos.atualizar(contato);
@@ -80,7 +81,7 @@ public class ContatoController {
 	}
 	
 	@Delete
-	@Path("/contato/{id}")
+	@Path(value = "/contato/{id}")
 	public void remover(Long id) {
 		contatos.desativarComId(id);
 		result.use(status()).ok();

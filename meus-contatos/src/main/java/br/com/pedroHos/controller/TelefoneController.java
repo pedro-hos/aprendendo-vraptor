@@ -27,7 +27,7 @@ public class TelefoneController {
 	}
 	
 	@Get
-	@Path("/telefone/tipo")
+	@Path(value = "/telefone/tipo")
 	public void tipos() {
 		result.use(json()).from(TipoTelefone.values(), "tipos").serialize();
 	}
