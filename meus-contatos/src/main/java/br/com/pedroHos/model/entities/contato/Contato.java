@@ -9,12 +9,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.pedroHos.model.entities.DefaultEntity;
 
 @Entity
-@XmlRootElement
 public class Contato extends DefaultEntity {
 
 	private static final long serialVersionUID = 1;

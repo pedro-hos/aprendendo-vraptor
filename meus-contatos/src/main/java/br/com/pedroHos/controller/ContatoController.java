@@ -47,7 +47,10 @@ public class ContatoController {
 	@Get
 	@Path(value = "/contato/tipo")
 	public void tipos() {
-		result.use(json()).from(TipoContato.values(), "tipos").serialize();
+		result.use(json())
+			  .withoutRoot()
+			  .from(TipoContato.values())
+			  .serialize();
 	}
 	
 	@Post

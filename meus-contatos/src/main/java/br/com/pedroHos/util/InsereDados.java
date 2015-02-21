@@ -33,14 +33,14 @@ public class InsereDados {
 		Telefone t1 = new Telefone();
 		t1.setContato(contato);
 		t1.setDdd("12");
-		t1.setTelefone("123456");
+		t1.setTelefone("9999-9999");
 		t1.setTipoTelefone(TipoTelefone.CELULAR);
 		
 		Telefone t2 = new Telefone();
 		t2.setContato(contato);
 		t2.setDdd("12");
-		t2.setTelefone("123456789");
-		t2.setTipoTelefone(TipoTelefone.CELULAR);
+		t2.setTelefone("1222-2222");
+		t2.setTipoTelefone(TipoTelefone.FIXO );
 		
 		contato.setTelefones(Arrays.asList(t1, t2));
 		
