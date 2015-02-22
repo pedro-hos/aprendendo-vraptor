@@ -24,31 +24,30 @@
 					<div class="form-group">
 						<label for="_tipoContato" class="col-sm-2 control-label">Tipo Contato</label>
 						<div class="col-sm-5">
-							<select ng-model="contato.tipoContato" ng-options="contato.tipoContato for tipo in contatoTipos" class="form-control">
-							
+							<select id="_tipoContato" class="form-control" ng-model="contato.tipoContato">
+								<option value=""> -- Escolha um Tipo -- </option>
+								<option ng-repeat="tipo in contatoTipos" value="{{tipo}}"> {{tipo}} </option>
 							</select>
 						</div>
 					</div>
 					
-					<div id="_telefones">
-					
+					<div id="_telefones" ng-repeat="telefone in contato.telefones">
 						<div class="form-group">
 							<label for="_ddd" class="col-sm-2 control-label">Telefone</label>
 							<div class="col-sm-2">
-								<input id="_ddd" type="text" class="form-control" placeholder="DDD">
+								<input id="_ddd" type="text" class="form-control" placeholder="DDD" ng-model="telefone.ddd">
 							</div>
 							<div class="col-sm-3">
-								<input id="_telefone" type="text" class="form-control" placeholder="Telefone" >
+								<input id="_telefone" type="text" class="form-control" placeholder="Telefone" ng-model="telefone.telefone">
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label for="_tipoTelefone" class="col-sm-2 control-label">Tipo Telefone</label>
 							<div class="col-sm-5">
-								<select id="_tipoTelefone" class="form-control">
-									  <option ng-repeat="tipo in telefoneTipos">
-									  	{{tipo}}
-									  </option>
+								<select id="_tipoContato" class="form-control" ng-model="telefone.tipoTelefone">
+									<option value=""> -- Escolha um Tipo -- </option>
+									<option ng-repeat="tipo in telefoneTipos" value="{{tipo}}"> {{tipo}} </option>
 								</select>
 							</div>
 						</div>
