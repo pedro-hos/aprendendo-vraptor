@@ -31,28 +31,56 @@
 						</div>
 					</div>
 					
-					<div id="_telefones" ng-repeat="telefone in contato.telefones">
-						<div class="form-group">
-							<label for="_ddd" class="col-sm-2 control-label">Telefone</label>
-							<div class="col-sm-2">
-								<input id="_ddd" type="text" class="form-control" placeholder="DDD" ng-model="telefone.ddd">
+					<div ng-if="contato.id == null">
+						
+						<div id="_telefones" ng-repeat="i in getNumber() track by $index">
+						
+							<div class="form-group">
+								<label for="_ddd" class="col-sm-2 control-label">Telefone</label>
+								<div class="col-sm-2">
+									<input id="_ddd" type="text" class="form-control" placeholder="DDD" ng-model="contato.telefones.telefone.ddd">
+								</div>
+								<div class="col-sm-3">
+									<input id="_telefone" type="text" class="form-control" placeholder="Telefone" ng-model="contato.telefones.telefone.telefone">
+								</div>
 							</div>
-							<div class="col-sm-3">
-								<input id="_telefone" type="text" class="form-control" placeholder="Telefone" ng-model="telefone.telefone">
+							<div class="form-group">
+								<label for="_tipoTelefone" class="col-sm-2 control-label">Tipo Telefone</label>
+								<div class="col-sm-5">
+									<select id="_tipoContato" class="form-control" ng-model="contato.telefones.telefone.tipoTelefone">
+										<option value=""> -- Escolha um Tipo -- </option>
+										<option ng-repeat="tipo in telefoneTipos" value="{{tipo}}"> {{tipo}} </option>
+									</select>
+								</div>
 							</div>
 						</div>
 						
-						<div class="form-group">
-							<label for="_tipoTelefone" class="col-sm-2 control-label">Tipo Telefone</label>
-							<div class="col-sm-5">
-								<select id="_tipoContato" class="form-control" ng-model="telefone.tipoTelefone">
-									<option value=""> -- Escolha um Tipo -- </option>
-									<option ng-repeat="tipo in telefoneTipos" value="{{tipo}}"> {{tipo}} </option>
-								</select>
+					</div>
+					
+					<div ng-if="contato.id != null">
+						<div id="_telefones"  ng-repeat="telefone in contato.telefones">
+							<div class="form-group">
+								<label for="_ddd" class="col-sm-2 control-label">Telefone</label>
+								<div class="col-sm-2">
+									<input id="_ddd" type="text" class="form-control" placeholder="DDD" ng-model="telefone.ddd">
+								</div>
+								<div class="col-sm-3">
+									<input id="_telefone" type="text" class="form-control" placeholder="Telefone" ng-model="telefone.telefone">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="_tipoTelefone" class="col-sm-2 control-label">Tipo Telefone</label>
+								<div class="col-sm-5">
+									<select id="_tipoContato" class="form-control" ng-model="telefone.tipoTelefone">
+										<option value=""> -- Escolha um Tipo -- </option>
+										<option ng-repeat="tipo in telefoneTipos" value="{{tipo}}"> {{tipo}} </option>
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary">Salvar</button>
+					<button type="submit" class="btn btn-primary" ng-click="save()">Salvar</button>
+					<button type="button" class="btn btn-primary" ng-click="addPhone()">add</button>
 			</form>
 
 	<hr>
