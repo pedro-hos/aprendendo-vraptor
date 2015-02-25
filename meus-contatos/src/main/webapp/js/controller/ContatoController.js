@@ -1,13 +1,6 @@
 var ContatoController = function($scope, ContatoService, TelefoneService) {
 	
-	$scope.number = 1;
-	$scope.getNumber = function() {
-		return new Array($scope.number);
-	};
-	
-	$scope.addPhone = function() { 
-		$scope.number = $scope.number + 1;
-	}
+	$scope.inputCounter = 0;
 	
 	$scope.contato = new ContatoService();
 
@@ -31,7 +24,7 @@ var ContatoController = function($scope, ContatoService, TelefoneService) {
 	
 	$scope.save = function(){
 		
-		console.log($scope.contato);
+		console.log(angular.toJson($scope.contato));
 		
 		if($scope.contato.id > 0){
 			$scope.update();

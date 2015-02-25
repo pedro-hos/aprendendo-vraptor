@@ -2,7 +2,7 @@ $app.factory('ContatoService', [ '$resource', function($resource) {
 	
 	return $resource('contato/:params', {}, {
 		create : {
-			method : 'POST',
+			method : 'POST'
 		},
 		
 		list : {
