@@ -1,6 +1,7 @@
 var ContatoController = function($scope, ContatoService, TelefoneService) {
 	
 	$scope.inputCounter = 0;
+	$scope.telefones = [];
 	
 	$scope.contato = new ContatoService();
 
@@ -17,19 +18,18 @@ var ContatoController = function($scope, ContatoService, TelefoneService) {
 	};
 	
 	$scope.remove = function(contato) {
-		contato.$remove({params:contato.id}, function(res) {
+		contato.$remove({params:$scope.contato.id}, function(res) {
 			$scope.contatos = ContatoService.list();
 		});
 	};
 	
-	$scope.save = function(){
-		
-		console.log(angular.toJson($scope.contato));
-		
-		if($scope.contato.id > 0){
+	$scope.save = function() {
+		if($scope.contato.id > 0) {
 			$scope.update();
-		}else{
-			$scope.contato.$create(function(){
+		} else {
+			
+			$scope.contato.telefones = $scope.telefones;
+			$scope.contato.$create(function() {
 				$scope.contatos = ContatoService.list();
 				$scope.reset();
 			});
@@ -37,7 +37,7 @@ var ContatoController = function($scope, ContatoService, TelefoneService) {
 	};
 	
 	$scope.update = function(){
-		$scope.contato.$update(function(){
+		$scope.contato.$update({params:$scope.contato.id}, function(){
 			$scope.contatos = ContatoService.list();
 			$scope.reset();
 		});

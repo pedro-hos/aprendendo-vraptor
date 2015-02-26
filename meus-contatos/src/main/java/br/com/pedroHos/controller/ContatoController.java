@@ -57,13 +57,7 @@ public class ContatoController {
 	@Path(value = "/contato")
 	@Consumes(value = "application/json", options = WithoutRoot.class)
 	public void novo( Contato contato ) {
-		
-		if(contato.getTelefones() != null) {
-			for (Telefone telefone : contato.getTelefones()) {
-				telefone.setContato(contato);
-			}
-		}
-		
+		setPhone(contato);
 		contatos.novo(contato);
 		result.use(status()).ok();
 	}
@@ -83,8 +77,17 @@ public class ContatoController {
 	@Consumes(value = "application/json", options = WithoutRoot.class)
 	public void editar(Contato contato, Long id) {
 		contato.setId(id);
+		setPhone(contato);
 		contatos.atualizar(contato);
 		result.use(status()).ok();
+	}
+
+	private void setPhone(Contato contato) {
+		if(contato.getTelefones() != null) {
+			for (Telefone telefone : contato.getTelefones()) {
+				telefone.setContato(contato);
+			}
+		}
 	}
 	
 	@Delete
