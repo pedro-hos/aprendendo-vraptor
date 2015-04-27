@@ -67,7 +67,7 @@ public class ContatoController {
 	}
 	
 	@Put
-	@Path(value = "/contato/{id}")
+	@Path(value = "/{id}")
 	@Consumes(value = "application/json", options = WithoutRoot.class)
 	public void editar(Contato contato, Long id) {
 		contato.setId(id);
@@ -85,7 +85,7 @@ public class ContatoController {
 	}
 	
 	@Delete
-	@Path(value = "/contato/{id}")
+	@Path(value = "/{id}")
 	public void remover(Long id) {
 		contatos.desativarComId(id);
 		result.use(status()).ok();
