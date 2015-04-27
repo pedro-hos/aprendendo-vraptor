@@ -13,3 +13,5 @@ angular
       });
 
   });
+
+    var $SERVICES_CONTEXT = "http://localhost:8080/meus-contatos/";
