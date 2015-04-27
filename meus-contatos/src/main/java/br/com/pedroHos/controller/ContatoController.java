@@ -53,7 +53,7 @@ public class ContatoController {
 	public void novo( Contato contato ) {
 		setPhone(contato);
 		contatos.novo(contato);
-		result.use(status()).ok();
+		result.use(status()).created();
 	}
 	
 	@Get
