@@ -11,6 +11,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.pedroHos.model.entities.contato.TipoTelefone;
 
 @Controller
+@Path(value="/telefone")
 public class TelefoneController {
 	
 	private Result result;
@@ -27,7 +28,7 @@ public class TelefoneController {
 	}
 	
 	@Get
-	@Path(value = "/telefone/tipo")
+	@Path(value = { "/tipo", "/tipo/" })
 	public void tipos() {
 		result.use(json())
 			  .withoutRoot()

@@ -17,10 +17,10 @@ import br.com.caelum.vraptor.serialization.gson.WithoutRoot;
 import br.com.pedroHos.model.entities.contato.Contato;
 import br.com.pedroHos.model.entities.contato.Telefone;
 import br.com.pedroHos.model.entities.contato.TipoContato;
-import br.com.pedroHos.model.entities.contato.TipoTelefone;
 import br.com.pedroHos.model.repositories.contato.Contatos;
 
 @Controller
+@Path(value = "/contato")
 public class ContatoController {
 	
 	private Result result;
@@ -38,14 +38,8 @@ public class ContatoController {
 		this.contatos = contatos;
 	}
 	
-	public void formulario() {
-		result.include( TipoContato.values() )
-			  .include( TipoTelefone.values())
-			  .include( "contatoList", contatos.todosAtivos());
-	}
-	
 	@Get
-	@Path(value = "/contato/tipo")
+	@Path(value = "/tipo")
 	public void tipos() {
 		result.use(json())
 			  .withoutRoot()
@@ -54,7 +48,7 @@ public class ContatoController {
 	}
 	
 	@Post
-	@Path(value = "/contato")
+	@Path(value = {"/", ""})
 	@Consumes(value = "application/json", options = WithoutRoot.class)
 	public void novo( Contato contato ) {
 		setPhone(contato);
@@ -63,7 +57,7 @@ public class ContatoController {
 	}
 	
 	@Get
-	@Path(value = "/contato")
+	@Path(value = {"/", ""})
 	public void todos() {
 		result.use(json())
 			  .withoutRoot()
@@ -82,7 +76,7 @@ public class ContatoController {
 		result.use(status()).ok();
 	}
 
-	private void setPhone(Contato contato) {
+	protected void setPhone(Contato contato) {
 		if(contato.getTelefones() != null) {
 			for (Telefone telefone : contato.getTelefones()) {
 				telefone.setContato(contato);
