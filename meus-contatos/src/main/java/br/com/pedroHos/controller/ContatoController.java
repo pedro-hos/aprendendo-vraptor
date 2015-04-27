@@ -76,19 +76,19 @@ public class ContatoController {
 		result.use(status()).ok();
 	}
 
+	@Delete
+	@Path(value = "/{id}")
+	public void remover(Long id) {
+		contatos.desativarComId(id);
+		result.use(status()).ok();
+	}
+	
 	protected void setPhone(Contato contato) {
 		if(contato.getTelefones() != null) {
 			for (Telefone telefone : contato.getTelefones()) {
 				telefone.setContato(contato);
 			}
 		}
-	}
-	
-	@Delete
-	@Path(value = "/{id}")
-	public void remover(Long id) {
-		contatos.desativarComId(id);
-		result.use(status()).ok();
 	}
 
 }
