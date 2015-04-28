@@ -4,6 +4,12 @@ angular.module('meus-contatos')
 	   	return $resource($SERVICES_CONTEXT + 'contato/:params', {}, {
 	   		update : {
 				method : "PUT"
+			},
+
+			tipos :{
+				method : 'GET',
+				params:{ params:'tipo' },
+				isArray : true
 			}
 	   	});
 

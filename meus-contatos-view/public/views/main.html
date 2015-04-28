@@ -3,7 +3,84 @@
     <h3 class="panel-title">Novo Contato</h3>
   </div>
   <div class="panel-body">
-  	Form
+  	<form class="form-horizontal" role="form" name="mainForm" ng-submit="salvar()">
+              <div class="form-group">
+                <label for="_nome" class="col-sm-2 control-label">Nome</label>
+                <div class="col-sm-5">
+                  <input id="_nome" type="text" class="form-control" placeholder="Nome" ng-model="contato.nome" ng-required="true">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="_email" class="col-sm-2 control-label">E-mail</label>
+                <div class="col-sm-5">
+                  <input id="_email" type="email" class="form-control" placeholder="E-mail" ng-model="contato.email" ng-required="true">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="_tipoContato" class="col-sm-2 control-label">Tipo Contato</label>
+                <div class="col-sm-5">
+                  <select id="_tipoContato" class="form-control" ng-model="contato.tipoContato">
+                    <option value=""> -- Escolha um Tipo -- </option>
+                    <option ng-repeat="tipo in contatoTipos" value="{{tipo}}"> {{tipo}} </option>
+                  </select>
+                </div>
+              </div>
+
+             <hr>
+
+             <div class="form-group">
+               <label for="_ddd" class="col-sm-2 control-label">Telefone 01</label>
+               <div class="col-sm-2">
+                 <input id="_ddd" type="text" class="form-control" placeholder="DDD" ng-model="contato.telefones[0].ddd">
+               </div>
+               <div class="col-sm-3">
+                 <input id="_telefone" type="text" class="form-control" placeholder="Telefone" 
+                        ng-model="contato.telefones[0].telefone">
+               </div>
+             </div>
+             <div class="form-group">
+               <label for="_tipoTelefone" class="col-sm-2 control-label">Tipo Telefone</label>
+               <div class="col-sm-5">
+                 <select id="_tipoContato" class="form-control" ng-model="contato.telefones[0].tipoTelefone">
+                   <option value=""> -- Escolha um Tipo -- </option>
+                   <option ng-repeat="tipo in telefoneTipos" value="{{tipo}}"> {{tipo}} </option>
+                 </select>
+               </div>
+             </div>
+
+             <div class="form-group">
+               <label for="_ddd" class="col-sm-2 control-label">Telefone 02</label>
+               <div class="col-sm-2">
+                 <input id="_ddd" type="text" class="form-control" placeholder="DDD"
+                        ng-model="contato.telefones[1].ddd">
+               </div>
+               <div class="col-sm-3">
+                 <input id="_telefone" type="text" class="form-control" placeholder="Telefone" 
+                        ng-model="contato.telefones[1].telefone">
+               </div>
+             </div>
+             <div class="form-group">
+               <label for="_tipoTelefone" class="col-sm-2 control-label">Tipo Telefone</label>
+               <div class="col-sm-5">
+                 <select id="_tipoContato" class="form-control" ng-model="contato.telefones[1].tipoTelefone">
+                   <option value=""> -- Escolha um Tipo -- </option>
+                   <option ng-repeat="tipo in telefoneTipos" value="{{tipo}}"> {{tipo}} </option>
+                 </select>
+               </div>
+             </div>
+              
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-success" ng-disabled="mainForm.$invalid">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                    Cadastrar
+                  </button>
+                </div>
+              </div>
+
+          </form>
   </div>
 </div>
 
@@ -12,7 +89,43 @@
     <h3 class="panel-title">Contatos</h3>
   </div>
   <div class="panel-body">
-  	Lista
+  	<table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Tipo Contato</th>
+            <th>Telefones</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="contato in contatos" id="_contato">
+            <th scope="row">{{contato.id}}</th>
+            <td>{{contato.nome}}</td>
+            <td>{{contato.email}}</td>
+            <td>{{contato.tipoContato}}</td>
+            <td>
+              <ol>
+                <li ng-repeat="telefone in contato.telefones">
+                  ({{telefone.ddd}}) {{telefone.telefone}} [{{telefone.tipoTelefone}}]
+                </li>
+              </ol>
+            </td>
+            <td>
+              <a id="_editar" ng-click="edit(contato)" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                Editar
+              </a>
+              <a id="_remover" ng-click="remove(contato)" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                Remover
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </div>
 
