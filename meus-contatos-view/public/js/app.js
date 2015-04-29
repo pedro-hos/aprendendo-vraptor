@@ -1,17 +1,17 @@
 angular
-  .module('meus-contatos', [ 'ngResource', 'ngRoute' ])
-  .config(function ($routeProvider) {
-    $routeProvider
+    .module('meus-contatos', ['ngResource', 'ngRoute'])
+    .config(function ($routeProvider) {
+        $routeProvider
 
-      .when('/', {
-        templateUrl: 'public/views/main.html',
-        controller: 'MainController'
-      })
+            .when('/', {
+                templateUrl: 'public/views/main.html',
+                controller: 'MainController'
+            })
 
-      .otherwise({
-        redirectTo: '/'
-      });
+            .otherwise({
+                redirectTo: '/'
+            });
 
-  });
+    });
 
-    var $SERVICES_CONTEXT = "http://localhost:8080/meus-contatos/";
+var $SERVICES_CONTEXT = "http://localhost:8080/meus-contatos/";
