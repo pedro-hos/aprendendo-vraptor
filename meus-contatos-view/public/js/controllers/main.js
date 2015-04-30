@@ -2,11 +2,27 @@ angular.module('meus-contatos')
     .controller('MainController', function ($scope, contatoService, telefoneService) {
 
         $scope.contato = new contatoService();
-        $scope.contatos = contatoService.query();
+
+        $scope.contatos = [];
+
         $scope.contatoTipos = contatoService.tipos();
         $scope.telefoneTipos = telefoneService.tipos();
         $scope.contato.telefones = [];
 
+
+        function buscarTodos() {
+            contatoService.query(
+                function (contatos) {
+                   $scope.contatos = contatos; 
+                },
+
+                function (erro) {
+                    console.log(erro);
+                }
+            );
+        }
+
+        buscarTodos();
 
         $scope.salvar = function () {
             $scope.contato.id > 0 ? atualizar() : novo();
@@ -18,6 +34,8 @@ angular.module('meus-contatos')
 
             $scope.contato.$save().then(function () {
                 $scope.contato = new contatoService();
+            }).catch( function (erro) {
+                console.log(erro);
             });
 
         };
@@ -28,6 +46,10 @@ angular.module('meus-contatos')
                 function () {
                     $scope.contato = new contatoService();
                     $scope.contatos = contatoService.query();
+                },
+
+                function (erro) {
+                    console.log(erro);
                 }
             );
 
@@ -42,7 +64,11 @@ angular.module('meus-contatos')
             if (confirm('Você têm certeza que deseja excluir?')) {
                 contatoService.delete({params: contato.id},
                     function () {
-                        $scope.contatos = contatoService.query();
+                        buscarTodos;
+                    },
+
+                    function (erro) {
+                        console.log(erro);
                     });
             }
 

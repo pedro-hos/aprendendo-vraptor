@@ -11,6 +11,7 @@ angular.module('meus-contatos')
                 params: {params: 'tipo'},
                 isArray: true
             }
+            
         });
 
     }]);
