@@ -34,6 +34,7 @@ angular.module('meus-contatos')
 
             $scope.contato.$save().then(function () {
                 $scope.contato = new contatoService();
+                buscarTodos();
             }).catch( function (erro) {
                 console.log(erro);
             });
@@ -45,7 +46,7 @@ angular.module('meus-contatos')
             $scope.contato.$update({params: $scope.contato.id},
                 function () {
                     $scope.contato = new contatoService();
-                    $scope.contatos = contatoService.query();
+                    buscarTodos();
                 },
 
                 function (erro) {
@@ -64,7 +65,7 @@ angular.module('meus-contatos')
             if (confirm('Você têm certeza que deseja excluir?')) {
                 contatoService.delete({params: contato.id},
                     function () {
-                        buscarTodos;
+                        buscarTodos();
                     },
 
                     function (erro) {
